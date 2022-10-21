@@ -1,0 +1,18 @@
+{
+	"extension": {
+		"version": "0.2.0",
+		"json": 1
+	},
+	"project": {
+		"name": "spin-up",
+		"description": "17688A Corona del Sol 2022 Spin-Up Code",
+		"creationDate": "10/21/2022, 8:04:08 AM",
+		"platform": "V5",
+		"language": "python",
+		"slot": 1,
+		"sdkVersion": "V5_1_0_1_14",
+		"python": {
+			"main": "src/main.py"
+		}
+	}
+}
