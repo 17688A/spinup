@@ -309,7 +309,9 @@
       }
     },
     "upload_options": {
-      "description": "17688A Corona del Sol Spinup"
+      "description": "17688A Corona del Sol Spinup",
+      "slot": 1,
+      "icon": "pros"
     }
   }
 }
