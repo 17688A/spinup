@@ -1,4 +1,4 @@
-bin/main.cpp.o: src/main.cpp src/./robot.h include/main.h include/api.h \
+bin/init.cpp.o: src/init.cpp src/./robot.h include/main.h include/api.h \
  include/pros/adi.h include/pros/colors.h include/pros/distance.h \
  include/pros/error.h include/pros/ext_adi.h include/pros/adi.h \
  include/pros/adi.h include/pros/gps.h include/pros/imu.h \
