@@ -10,6 +10,10 @@
  *     CORONA DEL SOL HIGH SCHOOL
  */
 
+// set up smart ports
+#define LEFT_MTR_PORT 1
+#define RIGHT_MTR_PORT 2
+
 // events
 void initialize();
 void competition_initialize();

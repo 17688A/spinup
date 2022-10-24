@@ -24,8 +24,8 @@
 void opcontrol() {
 	// Controller master is the instance that run the code
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
-	pros::Motor left_mtr(1);
-	pros::Motor right_mtr(2);
+	pros::Motor left_mtr(LEFT_MTR_PORT);
+	pros::Motor right_mtr(RIGHT_MTR_PORT);
 	// 2 lines above are the motor ports
 
 	while (true) {
