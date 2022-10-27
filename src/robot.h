@@ -13,6 +13,8 @@
 // set up smart ports
 #define LEFT_MTR_PORT 1
 #define RIGHT_MTR_PORT 2
+#define FLYWHEEL_MTR_PORT 3
+#define ROLLER_MTR_PORT 4
 
 // events
 void initialize();
