@@ -53,7 +53,7 @@ void opcontrol() {
 				rollerActive = false;
 			}
 			else {
-				roller_mtr.move_voltage(12000);
+				roller_mtr.move_voltage(10000);
 				rollerActive = true;
 			}
 		}
