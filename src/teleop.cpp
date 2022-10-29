@@ -1,4 +1,5 @@
 #include "./robot.h"
+#include "pros/misc.h"
 
 /**
  *  __ ______ __   ___   ___          
@@ -22,17 +23,27 @@
  * task, not resume it from where it left off.
  */
 
+// moters
 bool flywheelActive = false;
 bool rollerActive = false;
+
+// penumaics
+bool endGamePushed = false;
 
 void opcontrol() {
 	// Controller master is the instance that run the code
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+
+	// drive train
 	pros::Motor left_mtr(LEFT_MTR_PORT);
 	pros::Motor right_mtr(RIGHT_MTR_PORT);
+
+	// moters
 	pros::Motor flywheel_mtr(FLYWHEEL_MTR_PORT, true);
 	pros::Motor roller_mtr(ROLLER_MTR_PORT);
-	// 4 lines above are the motor ports
+
+	// penumaics
+	pros::ADIDigitalOut endgame_adi (ENDGAME_PENUMATIC_PORT);
 
 	while (true) {
 
@@ -57,6 +68,17 @@ void opcontrol() {
 				rollerActive = true;
 			}
 		}
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+			if(endGamePushed == true){
+				endgame_adi.set_value(false);
+				endGamePushed = false;
+			}
+			else {
+				endgame_adi.set_value(true);
+				endGamePushed = true;
+			}
+		}
+
 
 		// debugging
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
