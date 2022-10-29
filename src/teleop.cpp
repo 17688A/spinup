@@ -1,5 +1,6 @@
 #include "./robot.h"
 #include "pros/misc.h"
+#include "pros/misc.hpp"
 #include "pros/motors.hpp"
 
 /**
@@ -34,6 +35,7 @@ bool endGamePushed = false;
 void opcontrol() {
 	// Controller master is the instance that run the code
 	pros::Controller master(pros::E_CONTROLLER_MASTER);
+	pros::Controller partner(pros::E_CONTROLLER_PARTNER);
 
 	// drive train
 	pros::Motor left_mtr(LEFT_MTR_PORT);
@@ -98,6 +100,70 @@ void opcontrol() {
 			pros::delay(100);
 			endgame_mtr.brake();
 		}
+
+
+
+
+
+
+
+
+
+
+	// PARTNER CODE
+
+		if(partner.get_digital(pros::E_CONTROLLER_DIGITAL_L1)) {
+			if(flywheelActive == true){
+				flywheel_mtr.brake();
+				flywheelActive = false;
+				pros::delay(300);
+			}
+			else {
+				flywheel_mtr.move_voltage(12000);
+				flywheelActive = true;
+				pros::delay(300);
+			}
+		}
+
+		if(partner.get_digital(pros::E_CONTROLLER_DIGITAL_R1)) {
+			if(rollerActive == true){
+				roller_mtr.brake();
+				rollerActive = false;
+				pros::delay(300);
+			}
+			else {
+				roller_mtr.move_voltage(10000);
+				rollerActive = true;
+				pros::delay(300);
+			}
+		}
+		if(partner.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
+			if(endGamePushed == true){
+				endgame_adi.set_value(false);
+				endGamePushed = false;
+				pros::delay(300);
+			}
+			else {
+				endgame_adi.set_value(true);
+				endGamePushed = true;
+				pros::delay(300);
+			}
+		}
+		if(partner.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+			endgame_mtr.set_reversed(true);
+			endgame_mtr.move_voltage(10000);
+			pros::delay(100);
+			endgame_mtr.brake();
+		}
+		if(partner.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+			endgame_mtr.set_reversed(false);
+			endgame_mtr.move_voltage(10000);
+			pros::delay(100);
+			endgame_mtr.brake();
+		}
+
+
+
 
 		// debugging
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,
