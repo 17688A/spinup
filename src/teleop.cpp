@@ -72,10 +72,12 @@ void opcontrol() {
 			if(endGamePushed == true){
 				endgame_adi.set_value(false);
 				endGamePushed = false;
+				pros::delay(300);
 			}
 			else {
 				endgame_adi.set_value(true);
 				endGamePushed = true;
+				pros::delay(300);
 			}
 		}
 
