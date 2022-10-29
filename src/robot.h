@@ -15,6 +15,7 @@
 #define RIGHT_MTR_PORT 2
 #define FLYWHEEL_MTR_PORT 3
 #define ROLLER_MTR_PORT 4
+#define ENDGAME_MTR_PORT 5
 
 // set up digital ports
 #define ENDGAME_PENUMATIC_PORT 'A'

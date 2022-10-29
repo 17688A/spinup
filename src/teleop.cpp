@@ -1,5 +1,6 @@
 #include "./robot.h"
 #include "pros/misc.h"
+#include "pros/motors.hpp"
 
 /**
  *  __ ______ __   ___   ___          
@@ -36,11 +37,12 @@ void opcontrol() {
 
 	// drive train
 	pros::Motor left_mtr(LEFT_MTR_PORT);
-	pros::Motor right_mtr(RIGHT_MTR_PORT);
+	pros::Motor right_mtr(RIGHT_MTR_PORT, true);
 
 	// moters
 	pros::Motor flywheel_mtr(FLYWHEEL_MTR_PORT, true);
 	pros::Motor roller_mtr(ROLLER_MTR_PORT);
+	pros::Motor endgame_mtr(ENDGAME_MTR_PORT);
 
 	// penumaics
 	pros::ADIDigitalOut endgame_adi (ENDGAME_PENUMATIC_PORT);
@@ -51,10 +53,12 @@ void opcontrol() {
 			if(flywheelActive == true){
 				flywheel_mtr.brake();
 				flywheelActive = false;
+				pros::delay(300);
 			}
 			else {
 				flywheel_mtr.move_voltage(12000);
 				flywheelActive = true;
+				pros::delay(300);
 			}
 		}
 
@@ -62,10 +66,12 @@ void opcontrol() {
 			if(rollerActive == true){
 				roller_mtr.brake();
 				rollerActive = false;
+				pros::delay(300);
 			}
 			else {
 				roller_mtr.move_voltage(10000);
 				rollerActive = true;
+				pros::delay(300);
 			}
 		}
 		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_Y)) {
@@ -80,7 +86,16 @@ void opcontrol() {
 				pros::delay(300);
 			}
 		}
-
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_UP)) {
+			endgame_mtr.move_voltage(10000);
+			pros::delay(100);
+			endgame_mtr.brake();
+		}
+		if(master.get_digital(pros::E_CONTROLLER_DIGITAL_DOWN)) {
+			endgame_mtr.set_reversed(true);
+			pros::delay(100);
+			endgame_mtr.brake();
+		}
 
 		// debugging
 		pros::lcd::print(0, "%d %d %d", (pros::lcd::read_buttons() & LCD_BTN_LEFT) >> 2,

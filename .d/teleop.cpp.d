@@ -75,7 +75,8 @@ bin/teleop.cpp.o: src/teleop.cpp src/./robot.h include/main.h \
  include/pros/optical.hpp include/pros/optical.h \
  include/pros/rotation.hpp include/pros/rotation.h include/pros/rtos.hpp \
  include/pros/screen.hpp include/pros/screen.h include/pros/vision.hpp \
- include/pros/vision.h include/pros/link.hpp include/pros/link.h
+ include/pros/vision.h include/pros/link.hpp include/pros/link.h \
+ include/pros/motors.hpp
 src/./robot.h:
 include/main.h:
 include/api.h:
@@ -230,3 +231,4 @@ include/pros/vision.hpp:
 include/pros/vision.h:
 include/pros/link.hpp:
 include/pros/link.h:
+include/pros/motors.hpp:
